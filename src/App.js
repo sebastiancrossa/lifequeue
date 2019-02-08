@@ -35,8 +35,24 @@ class App extends Component {
     ]
   }
 
+  // Will change the state of the item when checked
   markComplete = (id) => {
-    console.log("Todo #", id);
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
+        }
+
+        return todo;
+      })
+    });
+  }
+
+  // Will delete the todo
+  deleteTodo = (id) => {
+    this.setState({
+      todos: [...this.state.todos.filter(todo => todo.id !== id)]
+    });
   }
 
   render() {
@@ -44,7 +60,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>App</h1>
-        <Todos todos={this.state.todos} markComplete={this.markComplete} />
+        <Todos todos={this.state.todos} markComplete={this.markComplete} deleteTodo={this.deleteTodo} />
       </div>
     );
   }
