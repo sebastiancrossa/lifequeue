@@ -3,6 +3,10 @@ import './App.css';
 
 // COMPONENTS
 import Todos from './components/Todos'
+import AddTodo from './components/AddTodo'
+
+// Display functions
+import Header from './components/layout/Header'
 
 class App extends Component {
   state = {
@@ -10,7 +14,7 @@ class App extends Component {
       {
         id: 1,
         title: 'Finish German assignment',
-        completed: true
+        completed: false
       },
       {
         id: 2,
@@ -35,7 +39,7 @@ class App extends Component {
     ]
   }
 
-  // Will change the state of the item when checked
+  // Changes the state of the item when checked
   markComplete = (id) => {
     this.setState({
       todos: this.state.todos.map(todo => {
@@ -48,7 +52,7 @@ class App extends Component {
     });
   }
 
-  // Will delete the todo
+  // Deletes the todo item
   deleteTodo = (id) => {
     this.setState({
       todos: [...this.state.todos.filter(todo => todo.id !== id)]
@@ -59,8 +63,11 @@ class App extends Component {
     console.log(this.state.todos);
     return (
       <div className="App">
-        <h1>App</h1>
-        <Todos todos={this.state.todos} markComplete={this.markComplete} deleteTodo={this.deleteTodo} />
+        <div className="container">
+          <Header />
+          <AddTodo />
+          <Todos todos={this.state.todos} markComplete={this.markComplete} deleteTodo={this.deleteTodo} />
+        </div>
       </div>
     );
   }
